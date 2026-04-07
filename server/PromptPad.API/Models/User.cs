@@ -15,7 +15,13 @@ namespace PromptPad.API.Models
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
+        [Required]
+        public string PasswordHash { get; set; } = string.Empty;
+
+        public int? RoleId { get; set; }
+        public virtual Role? Role { get; set; }
+
         // Navigation properties
-        public ICollection<Template> OwnedTemplates { get; set; } = new List<Template>();
+        public virtual ICollection<Template> OwnedTemplates { get; set; } = new List<Template>();
     }
 }

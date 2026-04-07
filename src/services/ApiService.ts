@@ -73,3 +73,21 @@ export const ApiService = {
     return res.json();
   }
 };
+
+export interface RegisterDto {
+  name: string;
+  email: string;
+  password?: string;
+}
+
+export interface LoginDto {
+  email: string;
+  password?: string;
+}
+
+export interface AuthResponseDto {
+  token: string;
+  name: string;
+  userId: number;
+  role?: string;
+}

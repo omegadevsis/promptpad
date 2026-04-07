@@ -146,3 +146,13 @@ C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\obj\Debug\net10.0\
 C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\obj\Debug\net10.0\PromptPad.API.pdb
 C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\obj\Debug\net10.0\PromptPad.API.genruntimeconfig.cache
 C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\obj\Debug\net10.0\ref\PromptPad.API.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\obj\Debug\net10.0\PromptPad.API.sourcelink.json
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\BCrypt.Net-Next.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Igor\WebstormProjects\promptpad\server\PromptPad.API\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
