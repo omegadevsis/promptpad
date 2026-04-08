@@ -16,9 +16,23 @@ namespace PromptPad.API.Data
         public DbSet<PromptVersion> PromptVersions { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<Permission> Permissions { get; set; } = null!;
+        public DbSet<Project> Projects { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure Project -> Templates (One-to-Many)
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.Templates)
+                .WithOne(t => t.Project)
+                .HasForeignKey(t => t.ProjectId)
+                .OnDelete(DeleteBehavior.SetNull); // Keep templates even if project is deleted (or could be Cascade)
+
+            modelBuilder.Entity<Project>()
+                .HasOne(p => p.CreatedBy)
+                .WithMany()
+                .HasForeignKey(p => p.CreatedByUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             // Configure Role <-> Permission (Many-to-Many)
             modelBuilder.Entity<Role>()
                 .HasMany(r => r.Permissions)
@@ -80,6 +94,10 @@ namespace PromptPad.API.Data
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456"), 
                     RoleId = 1 
                 }
+            );
+
+            modelBuilder.Entity<Project>().HasData(
+                new Project { Id = 1, Name = "Projeto Padrão", Description = "Projeto inicial criado automaticamente", CreatedByUserId = 1 }
             );
         }
     }

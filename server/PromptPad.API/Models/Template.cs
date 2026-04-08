@@ -23,5 +23,9 @@ namespace PromptPad.API.Models
 
         // Relationship to active Prompt
         public Prompt? ActivePrompt { get; set; }
+
+        // Relationship to Project
+        public int? ProjectId { get; set; }
+        public virtual Project? Project { get; set; }
     }
 }

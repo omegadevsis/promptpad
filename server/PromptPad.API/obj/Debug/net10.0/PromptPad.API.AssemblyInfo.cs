@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PromptPad.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b63b2bcaca010cc9cd061018453f890433317b5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72dd3ba98efcd349ea17461bac9f02e38f094622")]
 [assembly: System.Reflection.AssemblyProductAttribute("PromptPad.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PromptPad.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

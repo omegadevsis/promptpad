@@ -24,6 +24,8 @@ import Highlight from '@tiptap/extension-highlight'
 import FontFamily from '@tiptap/extension-font-family'
 import Placeholder from '@tiptap/extension-placeholder'
 
+import ProjectSelector from './components/projects/ProjectSelector'
+
 const App = () => {
   const { isDarkMode, toggleDarkMode, content, setContent, fetchTemplates, selectedTemplateId } = usePromptStore()
   const { isLoggedIn, user, logout } = useAuthStore()
@@ -124,7 +126,7 @@ const App = () => {
       <TemplateSidebar />
       
       <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-zinc-900 transition-colors duration-300">
-        <header className="h-14 border-b border-stone-200 dark:border-zinc-800 px-6 flex items-center justify-between shrink-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md z-10">
+        <header className="h-14 border-b border-stone-200 dark:border-zinc-800 px-6 flex items-center justify-between shrink-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md z-40">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
               <Cpu size={18} />
@@ -133,6 +135,10 @@ const App = () => {
               <h1 className="text-sm font-bold tracking-tight">PromptPad</h1>
               <p className="text-[10px] text-muted-foreground font-medium opacity-60">PROMPT EDITOR V1.0</p>
             </div>
+          </div>
+
+          <div className="flex-1 flex justify-center">
+            <ProjectSelector />
           </div>
 
           <div className="flex items-center gap-2">
@@ -202,7 +208,7 @@ const App = () => {
               onSetActivePanel={setActivePanel} 
             />
 
-            <main className="flex-1 overflow-hidden">
+            <main className="flex-1 overflow-hidden min-h-0">
               <EditorArea editor={editor} />
             </main>
           </>

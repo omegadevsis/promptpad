@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, Save, FileText, Type } from 'lucide-react';
+import { X, Save, FileText, Type, LayoutGrid } from 'lucide-react';
+import { usePromptStore } from '../../store/usePromptStore';
 
 interface CreateTemplateModalProps {
   isOpen: boolean;
@@ -8,11 +9,14 @@ interface CreateTemplateModalProps {
 }
 
 const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClose, onConfirm }) => {
+  const { projects, selectedProjectId } = usePromptStore();
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
+
+  const currentProject = projects.find(p => p.id === selectedProjectId);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +59,14 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
 
         {/* Body */}
         <form onSubmit={handleSubmit} className="p-5 space-y-5">
+          <div className="flex items-center gap-3 p-3 bg-stone-50 dark:bg-zinc-800/50 rounded-xl border border-stone-100 dark:border-zinc-800 mb-2">
+            <LayoutGrid size={16} className="text-primary" />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-tight text-muted-foreground leading-none mb-1 opacity-60">Projeto Destino</p>
+              <p className="text-xs font-bold text-foreground">{currentProject?.name || 'Nenhum projeto selecionado'}</p>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
               <Type size={12} /> Nome do Template

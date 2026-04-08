@@ -23,11 +23,49 @@ export const ApiService = {
     return res.json();
   },
 
-  async createTemplate(name: string, content: string): Promise<Template> {
+  async getProjects(): Promise<any[]> {
+    const authState = JSON.parse(localStorage.getItem('promptpad-auth') || '{}');
+    const token = authState.state?.token;
+    
+    const res = await fetch(`${API_URL}/projects`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Falha ao carregar projetos');
+    return res.json();
+  },
+
+  async createProject(name: string, description?: string): Promise<any> {
+    const authState = JSON.parse(localStorage.getItem('promptpad-auth') || '{}');
+    const token = authState.state?.token;
+
+    const res = await fetch(`${API_URL}/projects`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ name, description }),
+    });
+    if (!res.ok) throw new Error('Falha ao criar projeto');
+    return res.json();
+  },
+
+  async deleteProject(id: number): Promise<void> {
+    const authState = JSON.parse(localStorage.getItem('promptpad-auth') || '{}');
+    const token = authState.state?.token;
+
+    const res = await fetch(`${API_URL}/projects/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Falha ao excluir projeto');
+  },
+
+  async createTemplate(name: string, content: string, projectId?: number): Promise<Template> {
     const res = await fetch(`${API_URL}/templates`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, content }),
+      body: JSON.stringify({ name, content, projectId }),
     });
     if (!res.ok) throw new Error('Falha ao criar template');
     return res.json();

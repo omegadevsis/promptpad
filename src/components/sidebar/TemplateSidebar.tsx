@@ -5,17 +5,18 @@ import { useState } from 'react'
 import CreateTemplateModal from '../modals/CreateTemplateModal'
 
 const TemplateSidebar = () => {
-  const { templates, selectedTemplateId, selectTemplate, fetchTemplates } = usePromptStore()
+  const { templates, selectedTemplateId, selectTemplate, fetchTemplates, selectedProjectId } = usePromptStore()
   const [searchTerm, setSearchTerm] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const filteredTemplates = templates.filter(t => 
+    (t.projectId === selectedProjectId || !selectedProjectId) &&
     t.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleConfirmCreate = async (name: string, content: string) => {
     try {
-      const newTemplate = await ApiService.createTemplate(name, content)
+      const newTemplate = await ApiService.createTemplate(name, content, selectedProjectId || undefined)
       await fetchTemplates()
       // Optional: auto-select the newly created template
       selectTemplate(newTemplate.id)

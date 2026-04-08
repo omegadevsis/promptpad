@@ -1,9 +1,17 @@
+export interface Project {
+  id: number;
+  name: string;
+  description?: string;
+  createdAt: string;
+}
+
 export interface PromptTemplate {
   id: number;
   name: string;
   description?: string;
   content: string;
   updatedAt: string;
+  projectId?: number;
 }
 
 export interface PromptVersion {
@@ -22,7 +30,9 @@ export interface Variable {
 export interface PromptState {
   content: string;
   templates: PromptTemplate[];
+  projects: Project[];
   selectedTemplateId: number | null;
+  selectedProjectId: number | null;
   variables: Record<string, string>;
   isDarkMode: boolean;
 
@@ -35,5 +45,10 @@ export interface PromptState {
   selectTemplate: (id: number | null) => void;
   setVariable: (name: string, value: string) => void;
   toggleDarkMode: () => void;
+
+  // Project Actions
+  fetchProjects: () => Promise<void>;
+  setSelectedProjectId: (id: number | null) => void;
+  createProject: (name: string, description?: string) => Promise<void>;
 }
-export const TYPES_VERSION = '1.0.0';
+export const TYPES_VERSION = '1.1.0';

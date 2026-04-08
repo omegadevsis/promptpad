@@ -7,6 +7,7 @@ namespace PromptPad.API.DTOs
         public string? Description { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string Content { get; set; } = string.Empty;
+        public int? ProjectId { get; set; }
     }
 
     public class CreateTemplateDto
@@ -14,6 +15,21 @@ namespace PromptPad.API.DTOs
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public string? Content { get; set; }
+        public int? ProjectId { get; set; }
+    }
+
+    public class ProjectDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class CreateProjectDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
     }
 
     public class PromptVersionDto
@@ -57,6 +73,14 @@ namespace PromptPad.API.DTOs
 
     public class UpdateUserRoleDto
     {
+        public int? RoleId { get; set; }
+    }
+
+    public class CreateUserAdminDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
         public int? RoleId { get; set; }
     }
 }

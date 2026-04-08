@@ -57,5 +57,33 @@ namespace PromptPad.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPost]
+        public async Task<ActionResult<UserAdminDto>> CreateUser([FromBody] CreateUserAdminDto dto)
+        {
+            if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            {
+                return BadRequest("Email já cadastrado.");
+            }
+
+            var user = new User
+            {
+                Name = dto.Name,
+                Email = dto.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                RoleId = dto.RoleId
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetUsers), new { }, new UserAdminDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                RoleId = user.RoleId
+            });
+        }
     }
 }
