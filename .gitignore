@@ -21,6 +21,8 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sw?
-backend/bin
-backend/obj
+**/bin/
+**/obj/
 .codex
+*.db-shm
+*.db-wal

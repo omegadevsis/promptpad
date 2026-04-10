@@ -1,14 +1,16 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using PromptPad.API.Data;
 using System.Text;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using PromptPad.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // JWT Configuration
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "MinhaChaveSuperSecreta@2026!PromptPad";
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "PromptPad.API";
+
+DatabaseConfiguration.Configure(builder);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -29,13 +31,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 builder.Services.AddOpenApi();
-
-// SQLite Database
-builder.Services.AddDbContext<PromptPadContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=promptpad.db"));
 
 // Allow React dev server (locallhost:5173)
 builder.Services.AddCors(options =>
@@ -64,11 +62,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Ensure DB is created and seeded (Simplified for MVP)
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<PromptPadContext>();
-    db.Database.EnsureCreated(); 
-}
+DatabaseConfiguration.Migration(builder, app);
 
 app.Run();

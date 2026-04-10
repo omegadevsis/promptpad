@@ -20,6 +20,15 @@
     </PackageReference>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\Claims\" />
+    <Folder Include="DTOs\Projects\" />
+    <Folder Include="DTOs\PromptsTemplates\" />
+    <Folder Include="DTOs\Prompts\" />
+    <Folder Include="DTOs\Roles\" />
   </ItemGroup>
 
 </Project>
